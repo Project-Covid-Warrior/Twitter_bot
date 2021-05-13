@@ -3,11 +3,11 @@ import gspread
 gc = gspread.service_account(filename="credentials.json")
 
 
-states = ['rajasthan', 'assam']
-
 string = "I need oxygen in rajasthan".split()
 
 s = {'assam' : "1p5NBBhcic0u9tFLCiZW51cQEVt8qu11YEFumtlCPOC8", 'rajasthan' : "13OTTPng2ETyfBeAgFkpM1ZHfOulh6glm0Fw6qBh5ne8"}
+
+
 
 for state in states:
     if state in string:
