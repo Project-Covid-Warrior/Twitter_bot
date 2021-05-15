@@ -50,9 +50,9 @@ def scrape(hashtag, date_since):
 
             print(str(id) + ' - ' + text, flush=True)
 
-            tweet = spreadsheet.get_tweet(state)
+            tweet_toSend = spreadsheet.get_tweet(state)
 
-            api.update_status('@' + tweet.user.screen_name + " " + tweet, id)
+            api.update_status('@' + tweet.user.screen_name + " " + tweet_toSend, id)
             store_id(id, 'lastseen_id.txt')
         else:
             print("Already replied to " + str(id))
@@ -60,12 +60,17 @@ def scrape(hashtag, date_since):
 states = states_dist.get_states()
 
 def find_state(tweet):
-    tweet = tweet.capitalize()
+    tweet = tweet.title()
+    print(tweet)
+    print(type(tweet))
 
     for state in states:
         for dist in states[state]:
             if dist in tweet:
-                return state
+                if state == None:
+                    print("GOT THIS !!")
+                else:
+                    return state
 
 while True:
     scrape("#covidwarriorbottesting", "2021-05-13")

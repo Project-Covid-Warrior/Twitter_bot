@@ -11,6 +11,7 @@ sheets = {'assam' : "1p5NBBhcic0u9tFLCiZW51cQEVt8qu11YEFumtlCPOC8", 'rajasthan' 
 
 
 def get_tweet(state):
+    print(state)
     available = []
     worksheet = gc.open_by_key(sheets[state.lower()]).sheet1
 
@@ -26,5 +27,3 @@ def get_tweet(state):
     tweet = f"Supplier : {data[0]}, Service : {data[3]}, Contact Number : {data[1]}, Location : {data[2]}"
 
     return tweet
-
-open_file('Assam')
