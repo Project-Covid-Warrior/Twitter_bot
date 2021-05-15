@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 import tweepy
 import time
+import states_dist
 
 load_dotenv()
 
@@ -44,10 +45,20 @@ def scrape(hashtag, date_since):
 
         if id not in ids:
             print(str(id) + ' - ' + text, flush=True)
-            api.update_status('@' + tweet.user.screen_name + " If you are reading this, it means Bot is able to reply", id)
+            api.update_status('@' + tweet.user.screen_name + " This Bot is created to provide crowd sourced emergency services to the Covid-19 patients.", id)
             store_id(id, 'lastseen_id.txt')
         else:
             print("Already replied to " + str(id))
+
+states = states_dist.get_states()
+
+def find_state(tweet):
+    tweet = tweet.capitalize()
+
+    for state in states:
+        for dist in states[state]:
+            if dist in tweet:
+                return state
 
 while True:
     scrape("#covidwarriorbottesting", "2021-05-13")
