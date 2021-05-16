@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import tweepy
 import time
 import states_dist
+import spreadsheet
 
 load_dotenv()
 
@@ -39,13 +40,19 @@ def scrape(hashtag, date_since):
 
     for tweet in reversed(tweets_list):
         id = tweet.id_str
-        text = tweet.full_text
 
         ids = retrieve_id('lastseen_id.txt')
 
         if id not in ids:
+            text = tweet.full_text
+
+            state = find_state(text)
+
             print(str(id) + ' - ' + text, flush=True)
-            api.update_status('@' + tweet.user.screen_name + " This Bot is created to provide crowd sourced emergency services to the Covid-19 patients.", id)
+
+            tweet_toSend = spreadsheet.get_tweet(state)
+
+            api.update_status('@' + tweet.user.screen_name + " " + tweet_toSend, id)
             store_id(id, 'lastseen_id.txt')
         else:
             print("Already replied to " + str(id))
@@ -53,12 +60,17 @@ def scrape(hashtag, date_since):
 states = states_dist.get_states()
 
 def find_state(tweet):
-    tweet = tweet.capitalize()
+    tweet = tweet.title()
+    print(tweet)
+    print(type(tweet))
 
     for state in states:
         for dist in states[state]:
             if dist in tweet:
-                return state
+                if state == None:
+                    print("GOT THIS !!")
+                else:
+                    return state
 
 while True:
     scrape("#covidwarriorbottesting", "2021-05-13")
