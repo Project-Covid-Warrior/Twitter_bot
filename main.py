@@ -102,9 +102,12 @@ def find_state(tweet):
         address = google_map.locate(t)
         display_name = address['display_name'].split(',')
         country = display_name[-1].strip()
-        state = display_name[-2].strip()
 
         if country == "India":
+            try:
+                state = display_name[-2].strip()
+            except IndexError:
+                continue
             try:
                 temp = int(state)
                 state = display_name[-3].strip()
@@ -124,5 +127,5 @@ def find_service(tweet):
 
 
 while True:
-    scrape("#covidwarriorbottesting", "2021-05-13")
+    scrape("#covidwarriorbottesting", "2021-05-15")
     time.sleep(10)

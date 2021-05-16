@@ -5,9 +5,7 @@ import random
 gc = gspread.service_account(filename="credentials.json")
 
 
-string = "I need oxygen in Junagadh"
-
-sheets = {'assam' : "1p5NBBhcic0u9tFLCiZW51cQEVt8qu11YEFumtlCPOC8", 'rajasthan' : "13OTTPng2ETyfBeAgFkpM1ZHfOulh6glm0Fw6qBh5ne8"}
+sheets = {'rajasthan' : "1p5NBBhcic0u9tFLCiZW51cQEVt8qu11YEFumtlCPOC8", 'temp' : "13OTTPng2ETyfBeAgFkpM1ZHfOulh6glm0Fw6qBh5ne8"}
 
 
 def get_tweet(state, service_need):
