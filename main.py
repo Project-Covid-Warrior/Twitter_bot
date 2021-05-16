@@ -61,7 +61,7 @@ def scrape(hashtag, date_since):
             text = tweet.full_text
 
             state = find_state(text.lower())
-            service = find_service(text.lower())
+            service = find_service(text.lower(), service.lower())
 
             print(str(id) + ' - ' + text, flush=True)
 

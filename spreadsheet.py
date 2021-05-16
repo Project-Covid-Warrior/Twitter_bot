@@ -10,7 +10,7 @@ string = "I need oxygen in Junagadh"
 sheets = {'assam' : "1p5NBBhcic0u9tFLCiZW51cQEVt8qu11YEFumtlCPOC8", 'rajasthan' : "13OTTPng2ETyfBeAgFkpM1ZHfOulh6glm0Fw6qBh5ne8"}
 
 
-def get_tweet(state):
+def get_tweet(state, service_need):
     print(state)
     available = []
     worksheet = gc.open_by_key(sheets[state.lower()]).sheet1
@@ -19,8 +19,10 @@ def get_tweet(state):
  
     for i in range(2, length + 1):
         temp = worksheet.row_values(i)
-        
-        if temp[4] == 'Available':
+        status = temp[4].lower().strip()
+        service = temp[3].lower().strip()
+
+        if status == 'available' and service_need == service:
             available.append(temp[:4])
     
     data = random.choice(available)
