@@ -11,10 +11,9 @@ __author__ = ("aadilvarsh", "https://github.com/aadilvarsh")
 # author end
 
 
-import pprint
 from geopy.geocoders import Nominatim
 import geopy
-
+import json
 
 # constans
 
@@ -33,7 +32,7 @@ class loc:
         loc_ = self.APP.geocode(address)
 
         if loc is not None:
-            return pprint.pformat(loc_.raw)
+            return loc_.raw
 
         else:
             return {'status': 404}

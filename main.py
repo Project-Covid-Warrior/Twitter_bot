@@ -4,10 +4,13 @@ import tweepy
 import time
 import states_dist
 import spreadsheet
+from locApi import loc
 
 load_dotenv()
 
-token = os.getenv("TOKEN")
+google_map = loc()  # Object of loc class
+
+token = os.getenv("TOKEN")                       # API Tokens
 token_secret = os.getenv("TOKEN_SECRET")
 consumer_key = os.getenv("CONSUMER_KEY")
 consumer_secret = os.getenv("CONSUMER_SECRET")
@@ -17,6 +20,10 @@ auth.set_access_token(token, token_secret)
 api = tweepy.API(auth)
 
 def retrieve_id(file_name):
+    '''
+    Function to retrieve tweet id from file.
+    '''
+
     ids = []
     with open(file_name, 'r') as file:
         f = file.readlines()
@@ -28,6 +35,10 @@ def retrieve_id(file_name):
     return ids
 
 def store_id(id, file_name):
+    '''
+    Function to store tweet key into file.
+    '''
+
     with open(file_name, 'a') as f:
         f.write(str(id) + '\n')
     return
@@ -59,6 +70,7 @@ def scrape(hashtag, date_since):
 
 states = states_dist.get_states()
 
+"""
 def find_state(tweet):
     tweet = tweet.title()
     print(tweet)
@@ -71,6 +83,23 @@ def find_state(tweet):
                     print("GOT THIS !!")
                 else:
                     return state
+"""
+
+def find_state(tweet):
+    '''
+    Find state from tweet
+    Iterate through tweet words and put them in google map API
+    fetch the state and return it.
+    '''
+
+    tweet_list = tweet.split()
+
+    for t in tweet_list:
+        address = google_map.locate(t)
+
+        
+
+
 
 while True:
     scrape("#covidwarriorbottesting", "2021-05-13")
