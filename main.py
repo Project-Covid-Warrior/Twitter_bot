@@ -96,15 +96,17 @@ def find_state(tweet):
 
     for t in tweet_list:
         address = google_map.locate(t)
-        display_name = list(address['display_name'])
-        state = display_name[-2]
+        display_name = address['display_name'].split(',')
+        country = display_name[-1].strip()
+        state = display_name[-2].strip()
 
-        try:
-            temp = int(state)
-            state = display_name[-3]
-            return state
-        except ValueError:
-            return state
+        if country == "India":
+            try:
+                temp = int(state)
+                state = display_name[-3].strip()
+                return state
+            except ValueError:
+                return state
 
 
 while True:
