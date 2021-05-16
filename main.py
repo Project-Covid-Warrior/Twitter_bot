@@ -10,6 +10,8 @@ load_dotenv()
 
 google_map = loc()  # Object of loc class
 
+services = ['oxygen', 'beds', 'bed']
+
 token = os.getenv("TOKEN")                       # API Tokens
 token_secret = os.getenv("TOKEN_SECRET")
 consumer_key = os.getenv("CONSUMER_KEY")
@@ -107,6 +109,16 @@ def find_state(tweet):
                 return state
             except ValueError:
                 return state
+
+def find_service(tweet):
+    '''
+    Find the service need from user's tweet
+    '''
+    tweet_list = tweet.split()
+
+    for t in tweet_list:
+        if t in services:
+            return t
 
 
 while True:
