@@ -17,3 +17,4 @@ twitter==1.18.0
 urllib3==1.26.4
 tweepy
 gspread
+geopy
