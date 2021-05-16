@@ -10,20 +10,21 @@ load_dotenv()
 
 google_map = loc()  # Object of loc class
 
-services = ['oxygen', 'beds', 'bed']
+services = ['oxygen', 'beds', 'bed']    # List of services available
 
-token = os.getenv("TOKEN")                       # API Tokens
+token = os.getenv("TOKEN")                       # API Key-Tokens
 token_secret = os.getenv("TOKEN_SECRET")
 consumer_key = os.getenv("CONSUMER_KEY")
 consumer_secret = os.getenv("CONSUMER_SECRET")
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)       # Connecting to bot using creds
 auth.set_access_token(token, token_secret)
 api = tweepy.API(auth)
 
 def retrieve_id(file_name):
     '''
-    Function to retrieve tweet id from file.
+    Function to retrieve tweet id from file
+    and save it in a list of ids.
     '''
 
     ids = []
@@ -59,7 +60,8 @@ def scrape(hashtag, date_since):
         if id not in ids:
             text = tweet.full_text
 
-            state = find_state(text)
+            state = find_state(text.lower())
+            service = find_service(text.lower())
 
             print(str(id) + ' - ' + text, flush=True)
 
@@ -70,7 +72,7 @@ def scrape(hashtag, date_since):
         else:
             print("Already replied to " + str(id))
 
-states = states_dist.get_states()
+#states = states_dist.get_states()
 
 """
 def find_state(tweet):
