@@ -72,22 +72,6 @@ def scrape(hashtag, date_since):
         else:
             print("Already replied to " + str(id))
 
-#states = states_dist.get_states()
-
-"""
-def find_state(tweet):
-    tweet = tweet.title()
-    print(tweet)
-    print(type(tweet))
-
-    for state in states:
-        for dist in states[state]:
-            if dist in tweet:
-                if state == None:
-                    print("GOT THIS !!")
-                else:
-                    return state
-"""
 
 def find_state(tweet):
     '''
