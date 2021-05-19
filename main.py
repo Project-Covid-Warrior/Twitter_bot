@@ -2,7 +2,6 @@ import os
 from dotenv import load_dotenv
 import tweepy
 import time
-import states_dist
 import spreadsheet
 from locApi import loc
 import datetime

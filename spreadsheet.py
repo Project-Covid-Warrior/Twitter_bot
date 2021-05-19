@@ -1,5 +1,4 @@
 import gspread
-import states_dist
 import random
 
 gc = gspread.service_account(filename="credentials.json")
