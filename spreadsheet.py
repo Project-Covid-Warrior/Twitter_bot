@@ -50,7 +50,7 @@ def get_tweet(state, service_need):
     additional_info = data[7].strip()
 
     if service_need == "oxygen":
-        tweet = f"Name: {name}, contact: {contact}, location: {location}, price: {price}, service: {detail}"
+        tweet = f"Name: {name}, contact: {contact}, location: {location}, price: ₹{price}, service: {detail}"
 
         if additional_info != "":
             tweet += f" {additional_info}. Last verified by a Covid Warrior at {last_verified}"
@@ -58,7 +58,7 @@ def get_tweet(state, service_need):
             tweet += f" Last verified by a Covid warrior at {last_verified}"
     else:
         tweet = f"Name: {name}, contact: {contact}, location: {location}, service: {detail}"
-        
+
         if additional_info != "":
             tweet += f" {additional_info}. Last verified by a Covid Warrior at {last_verified}"
         else:
