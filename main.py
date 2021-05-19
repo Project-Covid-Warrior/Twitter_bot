@@ -107,6 +107,10 @@ def find_service(tweet):
 
     for t in tweet_list:
         if t in services:
+            if t == "oxygen":
+                index = tweet_list.index(t)
+                if tweet_list[index + 1] == "bed" or tweet_list[index + 1] == 'beds':
+                    t = "oxygen bed"
             return t
 
 
