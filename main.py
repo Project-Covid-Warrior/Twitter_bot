@@ -5,6 +5,7 @@ import time
 import states_dist
 import spreadsheet
 from locApi import loc
+import datetime
 
 load_dotenv()
 
@@ -115,7 +116,12 @@ def find_service(tweet):
                 t = "bed"
             return t
 
+def date():
+    today = datetime.date.today()
+    yesterday = today - datetime.timedelta(days=1)
+    return str(yesterday)
 
 while True:
-    scrape("#covidwarriorbottesting", "2021-05-15")
+    yesterday = date()
+    scrape("#covidwarriorbottesting", yesterday)
     time.sleep(10)
