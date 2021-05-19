@@ -30,8 +30,7 @@ def get_tweet(state, service):
  
     for i in range(2, length + 1):
         temp = worksheet.row_values(i)
-        status = temp[9].lower().strip()
-        service_need = temp[8].lower().strip()
+        service_need = temp[5].lower().strip()
 
         if status == 'available' and service_need == service:
             available.append(temp[:10])
@@ -41,9 +40,9 @@ def get_tweet(state, service):
     name = data[0].strip()
     contact = str(data[1]).strip()
     location = data[2].strip()
-    last_verified = data[3].strip()
+    last_verified = str(data[3]).strip()
     price = str(data[4]).strip()
-    bed_type = data[6].strip()
+    detail = data[6].strip()
     additional_info = data[7].strip()
 
     if service == "oxygen":
