@@ -5,7 +5,7 @@ import random
 gc = gspread.service_account(filename="credentials.json")
 
 
-sheets = {'rajsthan' : '1OWuwtd3eGZRHI4ODCSxKY6SNu9xCtcNCEC5NeSlDQ7k',
+sheets = {'rajasthan' : '1OWuwtd3eGZRHI4ODCSxKY6SNu9xCtcNCEC5NeSlDQ7k',
           'maharashtra' : '12csXtHJ-YtgsNTDIiWZNjwwRFR3ztt9FQ7YIYlDBdk0',
           'delhi' : '1CwE7_P4W_WZMkIPfTqBw9_17ESzlFJjC_ZdnU4F-CUo',
           'uttar pradesh' : '1SSF5TmpLEUXF7ia5Le_G6MjCt6I4TfBn_atvhDV1yiY',
@@ -32,7 +32,7 @@ def get_tweet(state, service):
         temp = worksheet.row_values(i)
         service_need = temp[5].lower().strip()
 
-        if status == 'available' and service_need == service:
+        if service_need == service:
             available.append(temp[:10])
     
     data = random.choice(available)
