@@ -5,7 +5,20 @@ import random
 gc = gspread.service_account(filename="credentials.json")
 
 
-sheets = {'rajasthan' : "1p5NBBhcic0u9tFLCiZW51cQEVt8qu11YEFumtlCPOC8", 'temp' : "13OTTPng2ETyfBeAgFkpM1ZHfOulh6glm0Fw6qBh5ne8"}
+sheets = {'rajsthan' : '1OWuwtd3eGZRHI4ODCSxKY6SNu9xCtcNCEC5NeSlDQ7k',
+          'maharashtra' : '12csXtHJ-YtgsNTDIiWZNjwwRFR3ztt9FQ7YIYlDBdk0',
+          'delhi' : '1CwE7_P4W_WZMkIPfTqBw9_17ESzlFJjC_ZdnU4F-CUo',
+          'uttar pradesh' : '1SSF5TmpLEUXF7ia5Le_G6MjCt6I4TfBn_atvhDV1yiY',
+          'tamil nadu' : '1Ke_C2DJNoiit7Ck9vAfbycPFBSoZzAgibFVBTESDraU',
+          'bihar' : '1LAS0L6zOgTBIYNFclO0ycxweY54wSr1ChYje1HU67t0',
+          'jharkhand' : '1poOvssfaN_KfVW7HKVcHUlk7dXHd67GR8ittEVMgMbk',
+          'west bengal' : '1rJ5la05Yzq6djZsH1QpMKsUPdrfAp9XgSEaQo9qvVaE',
+          'telangana' : '1Ffx7e5VwI3gfu1jgsZZWJ8Q4UbPbZaEAuOxF1mRM0pM',
+          'karnatka' : '1JAmFwdb96AKlb5BCbY0nvHmY0ar0IPA0kvTi-DKaQ1M',
+          'andhra pradesh' : '1fdjtxSVLw6KzicPzMIXzgkqt7cHGWsjW3DGr7Ue_2lA',
+          'madhya pradesh' : '1Riip7cYKvoRlgrjPqNMCP585_t5hHAivdywtlVD4gUo',
+          'odisha' : '1X7BYHrDI8Pmks5zrRCITDUEy3VtVTipdPmvb4nsHY78'
+          }
 
 
 def get_tweet(state, service):
@@ -30,7 +43,6 @@ def get_tweet(state, service):
     location = data[2].strip()
     last_verified = data[3].strip()
     price = str(data[4]).strip()
-    refill = data[5].strip()
     bed_type = data[6].strip()
     additional_info = data[7].strip()
 
