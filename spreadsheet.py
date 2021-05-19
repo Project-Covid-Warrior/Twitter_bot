@@ -34,9 +34,9 @@ def get_tweet(state, service_need):
 
         if service_need[-1] == "bed" and service_need[0] == "oxygen":
             if temp[6] == "oxygen bed":
-                available.append(temp[:7])
+                available.append(temp[:8])
         elif service_need[-1] == service:
-            available.append(temp[:7])
+            available.append(temp[:8])
     
     data = random.choice(available)
 
@@ -46,7 +46,11 @@ def get_tweet(state, service_need):
     last_verified = str(data[3]).strip()
     price = str(data[4]).strip()
     detail = data[6].strip()
-    additional_info = data[7].strip()
+    try:
+        additional_info = data[7].strip()
+        is_additional = True
+    except:
+        is_additional = False
 
     if service_need == "oxygen":
         tweet = f"Name: {name}, contact: {contact}, location: {location}, price: ₹{price}, service: {detail}"
@@ -58,7 +62,7 @@ def get_tweet(state, service_need):
     else:
         tweet = f"Name: {name}, contact: {contact}, location: {location}, service: {detail}"
 
-        if additional_info != "":
+        if is_additional:
             tweet += f" {additional_info}. Last verified by a Covid Warrior at {last_verified}"
         else:
             tweet += f" Last verified by a Covid warrior at {last_verified}"
