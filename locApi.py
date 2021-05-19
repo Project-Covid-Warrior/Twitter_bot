@@ -31,7 +31,7 @@ class loc:
 
         loc_ = self.APP.geocode(address)
 
-        if loc is not None:
+        if loc_ is not None:
             return loc_.raw
 
         else:
