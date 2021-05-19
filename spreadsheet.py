@@ -21,19 +21,23 @@ sheets = {'rajasthan' : '1OWuwtd3eGZRHI4ODCSxKY6SNu9xCtcNCEC5NeSlDQ7k',
           }
 
 
-def get_tweet(state, service):
-    print(state)
+def get_tweet(state, service_need):
+    service_need = service_need.split()
+    print(state)                        # For testing purpose
     available = []
     worksheet = gc.open_by_key(sheets[state.lower()]).sheet1
 
     length = len(worksheet.col_values(1))
  
-    for i in range(2, length + 1):
+    for i in range(8, length + 1):
         temp = worksheet.row_values(i)
-        service_need = temp[5].lower().strip()
+        service = temp[5].lower().strip()
 
-        if service_need == service:
-            available.append(temp[:10])
+        if service_need[-1] == "bed" and service_need[0] == "oxygen":
+            if temp[6] == "oxygen bed":
+                available.append(temp[:7])
+        elif service_need[-1] == service:
+            available.append(temp[:7])
     
     data = random.choice(available)
 
@@ -45,7 +49,19 @@ def get_tweet(state, service):
     detail = data[6].strip()
     additional_info = data[7].strip()
 
-    if service == "oxygen":
-        tweet = f"{name}, contact info {contact}, location: {location}, price: {price}, refill: {refill}. \nLast verified by a Covid Warrior at {last_verified}"
+    if service_need == "oxygen":
+        tweet = f"Name: {name}, contact: {contact}, location: {location}, price: {price}, service: {detail}"
+
+        if additional_info != "":
+            tweet += f" {additional_info}. Last verified by a Covid Warrior at {last_verified}"
+        else:
+            tweet += f" Last verified by a Covid warrior at {last_verified}"
+    else:
+        tweet = f"Name: {name}, contact: {contact}, location: {location}, service: {detail}"
+        
+        if additional_info != "":
+            tweet += f" {additional_info}. Last verified by a Covid Warrior at {last_verified}"
+        else:
+            tweet += f" Last verified by a Covid warrior at {last_verified}"
 
     return tweet
