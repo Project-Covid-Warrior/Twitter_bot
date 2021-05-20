@@ -34,6 +34,13 @@ def get_data(tweet_list, state, service_need, statewise=False):
         location = data[2].strip()
         city = location.split()[-1]
         
+        if statewise:
+            if service_need[-1] == "bed" and service_need[0] == "oxygen":
+                if temp[6] == "oxygen bed":
+                    available.append(temp[:8])
+            elif service_need[-1] == service:
+                available.append(temp[:8])            
+
         if city in tweet_list:
             if service_need[-1] == "bed" and service_need[0] == "oxygen":
                 if temp[6] == "oxygen bed":
