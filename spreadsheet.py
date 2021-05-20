@@ -28,10 +28,10 @@ def get_data(tweet_list, state, service_need, statewise=False):
 
     length = len(worksheet.col_values(1))
  
-    for i in range(8, length + 1):
+    for i in range(1, length + 1):
         temp = worksheet.row_values(i)
         service = temp[5].lower().strip()
-        location = data[2].strip()
+        location = temp[2]
         city = location.split()[-1]
         
         if statewise:
@@ -40,8 +40,7 @@ def get_data(tweet_list, state, service_need, statewise=False):
                     available.append(temp[:8])
             elif service_need[-1] == service:
                 available.append(temp[:8])            
-
-        if city in tweet_list:
+        elif city in tweet_list:
             if service_need[-1] == "bed" and service_need[0] == "oxygen":
                 if temp[6] == "oxygen bed":
                     available.append(temp[:8])
@@ -50,11 +49,12 @@ def get_data(tweet_list, state, service_need, statewise=False):
     
     return available
 
-def get_tweet(available):
+def get_tweet(available, service_need):
     data = random.choice(available)
     name = data[0].strip()
     contact = str(data[1]).strip()
     last_verified = str(data[3]).strip()
+    location = data[2].strip()
     price = str(data[4]).strip()
     detail = data[6].strip()
     try:
