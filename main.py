@@ -61,11 +61,14 @@ def scrape(hashtag, date_since):
             text = tweet.full_text
 
             state = find_state(text.lower())
-            service = find_service(text.lower())
+            service_need = find_service(text.lower())
 
             print(str(id) + ' - ' + text, flush=True)
 
-            tweet_toSend = spreadsheet.get_tweet(state, service.lower())
+            data = spreadsheet.get_data(tweet_list, state, service_need)
+
+            if not data:
+                data = spreadsheet.get_data(tweet_list, state, service_need, statewise=True)
 
             api.update_status('@' + tweet.user.screen_name + " " + tweet_toSend, id)
             store_id(id, 'lastseen_id.txt')
