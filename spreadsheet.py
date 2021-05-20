@@ -48,9 +48,10 @@ def get_data(tweet_list, state, service_need, statewise=False):
             elif service_need[-1] == service:
                 available.append(temp[:8])
     
-    return random.choice(available)
+    return available
 
-def get_tweet(data):
+def get_tweet(available):
+    data = random.choice(available)
     name = data[0].strip()
     contact = str(data[1]).strip()
     last_verified = str(data[3]).strip()
