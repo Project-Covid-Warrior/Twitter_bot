@@ -20,7 +20,7 @@ sheets = {'rajasthan' : '1OWuwtd3eGZRHI4ODCSxKY6SNu9xCtcNCEC5NeSlDQ7k',
           }
 
 
-def get_tweet(state, service_need):
+def get_data(tweet_list, state, service_need, statewise=False):
     service_need = service_need.split()
     print(state)                        # For testing purpose
     available = []
@@ -31,18 +31,21 @@ def get_tweet(state, service_need):
     for i in range(8, length + 1):
         temp = worksheet.row_values(i)
         service = temp[5].lower().strip()
-
-        if service_need[-1] == "bed" and service_need[0] == "oxygen":
-            if temp[6] == "oxygen bed":
+        location = data[2].strip()
+        city = location.split()[-1]
+        
+        if city in tweet_list:
+            if service_need[-1] == "bed" and service_need[0] == "oxygen":
+                if temp[6] == "oxygen bed":
+                    available.append(temp[:8])
+            elif service_need[-1] == service:
                 available.append(temp[:8])
-        elif service_need[-1] == service:
-            available.append(temp[:8])
     
-    data = random.choice(available)
+    return random.choice(available)
 
+def get_tweet(data):
     name = data[0].strip()
     contact = str(data[1]).strip()
-    location = data[2].strip()
     last_verified = str(data[3]).strip()
     price = str(data[4]).strip()
     detail = data[6].strip()
