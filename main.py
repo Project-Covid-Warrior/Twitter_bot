@@ -130,5 +130,8 @@ def date():
 
 while True:
     yesterday = date()
+
     scrape("#covidwarriorbottesting", yesterday)
+    #except:
+    #   pass
     time.sleep(10)

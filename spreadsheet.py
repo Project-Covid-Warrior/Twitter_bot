@@ -66,7 +66,7 @@ def get_tweet(available, service_need):
     if service_need == "oxygen":
         tweet = f"Name: {name}, contact: {contact}, location: {location}, price: ₹{price}, service: {detail}"
 
-        if additional_info != "":
+        if is_additional:
             tweet += f" {additional_info}. Last verified by a Covid Warrior at {last_verified}"
         else:
             tweet += f" Last verified by a Covid warrior at {last_verified}"
