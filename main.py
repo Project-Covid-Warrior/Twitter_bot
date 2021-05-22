@@ -21,6 +21,9 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)       # Connecting to 
 auth.set_access_token(token, token_secret)
 api = tweepy.API(auth)
 
+print("\nTwitter Bot is Up!")
+print("made with <3 by Covid Warriors")
+
 def retrieve_id(file_name):
     '''
     Function to retrieve tweet id from file
@@ -54,28 +57,32 @@ def scrape(hashtag, date_since):
 
     for tweet in reversed(tweets_list):
         id = tweet.id_str
+        
+        try:
+            ids = retrieve_id('lastseen_id.txt')
 
-        ids = retrieve_id('lastseen_id.txt')
+            if id not in ids:
+                text = tweet.full_text
 
-        if id not in ids:
-            text = tweet.full_text
+                state = find_state(text.lower())
+                service_need = find_service(text.lower())
 
-            state = find_state(text.lower())
-            service_need = find_service(text.lower())
+                print(str(id) + ' - ' + text, flush=True)
 
-            print(str(id) + ' - ' + text, flush=True)
+                available = spreadsheet.get_data(text.split(), state, service_need)
 
-            available = spreadsheet.get_data(text.split(), state, service_need)
+                if not available:
+                    available = spreadsheet.get_data(text.split(), state, service_need, statewise=True)
 
-            if not available:
-                available = spreadsheet.get_data(text.split(), state, service_need, statewise=True)
+                tweet_toSend = spreadsheet.get_tweet(available, service_need)
 
-            tweet_toSend = spreadsheet.get_tweet(available, service_need)
+                api.update_status('@' + tweet.user.screen_name + " " + tweet_toSend, id)
 
-            api.update_status('@' + tweet.user.screen_name + " " + tweet_toSend, id)
+                store_id(id, 'lastseen_id.txt')
+            else:
+                print("Already replied to " + str(id))
+        except:
             store_id(id, 'lastseen_id.txt')
-        else:
-            print("Already replied to " + str(id))
 
 
 def find_state(tweet):
@@ -130,8 +137,9 @@ def date():
 
 while True:
     yesterday = date()
-    try:
-        scrape("#covidwarriorbottesting", yesterday)
-    except:
-       pass
-    time.sleep(600)
+    scrape("#hospitalbeds", yesterday)
+    #scrape("#CovidHelp", yesterday)
+    #scrape("#NeedOxygen", yesterday)
+    #scrape("#COVIDEmergency", yesterday)
+    #scrape("#covidwarriorbottesting", yesterday)
+    time.sleep(100)
