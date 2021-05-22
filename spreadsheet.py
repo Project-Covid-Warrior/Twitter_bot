@@ -22,7 +22,6 @@ sheets = {'rajasthan' : '1OWuwtd3eGZRHI4ODCSxKY6SNu9xCtcNCEC5NeSlDQ7k',
 
 def get_data(tweet_list, state, service_need, statewise=False):
     service_need = service_need.split()
-    print(state)                        # For testing purpose
     available = []
     worksheet = gc.open_by_key(sheets[state.lower()]).sheet1
 
