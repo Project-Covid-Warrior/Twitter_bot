@@ -15,7 +15,6 @@ from geopy.geocoders import Nominatim
 import geopy
 import json
 
-# constans
 
 class loc:
 
@@ -35,46 +34,4 @@ class loc:
             return loc_.raw
 
         else:
-            return {'status': 404}
-
-    def coords(self, address: str):
-        '''
-            method to return cords
-            args: address
-        '''
-
-        loc_ = self.APP.geocode(address)
-
-        if loc_ is not None:
-            lat = loc_.raw['lat']
-            lon = loc_.raw['lon']
-
-            return {'coords': (lat, lon),
-                    'lat': lat,
-                    'lon': lon, }
-        else:
-
-            return {'status': 404}
-
-    def address_map(self, address: str):
-        '''
-            method to map elements out of address
-            args:
-            address
-        '''
-
-        loc_ = self.APP.geocode(address)
-
-        if loc_ is not None:
-            loc_ = loc_.raw
-
-            addr = loc_['display_name']
-            class_ = loc_['type']
-
-            return {
-                'addr': addr,
-                'class': class_
-            }
-        else:
-
             return {'status': 404}
