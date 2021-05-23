@@ -63,18 +63,27 @@ def get_tweet(available, service_need):
         is_additional = False
 
     if service_need == "oxygen":
-        tweet = f"Name: {name}, contact: {contact}, location: {location}, price: ₹{price}, service: {detail}"
+        tweet = f"""Name: {name}
+contact: {contact}
+location: {location}
+price: ₹{price}
+service: {detail}"""
 
         if is_additional:
-            tweet += f" {additional_info}. Last verified by a Covid Warrior at {last_verified}"
+            tweet += f""" {additional_info}.
+✅Last verified by a Covid Warrior at {last_verified}"""
         else:
-            tweet += f" Last verified by a Covid warrior at {last_verified}"
+            tweet += f"""\n✅Last verified by a Covid warrior at {last_verified}"""
     else:
-        tweet = f"Name: {name}, contact: {contact}, location: {location}, service: {detail}"
+        tweet = f"""Name: {name}
+contact: {contact}
+location: {location}
+service: {detail}"""
 
         if is_additional:
-            tweet += f" {additional_info}. Last verified by a Covid Warrior at {last_verified}"
+            tweet += f"""\n{additional_info}
+✅Last verified by a Covid Warrior at {last_verified}"""
         else:
-            tweet += f" Last verified by a Covid warrior at {last_verified}"
+            tweet += f"\n✅Last verified by a Covid warrior at {last_verified}"
 
     return tweet
